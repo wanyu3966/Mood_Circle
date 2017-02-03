@@ -14,11 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import static eecs395_495.mhealth_moodcircle.R.id.locate;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    TextView location;
+    TextView recognize;
+    TextView hello;
+    TextView call_log;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,11 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+
+        location= (TextView) findViewById(R.id.location);
+        hello= (TextView) findViewById(R.id.hello);
+        recognize= (TextView) findViewById(R.id.recognize);
+        call_log= (TextView) findViewById(R.id.call_log);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -85,19 +91,28 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_location) {
             // Handle the location actions
-            GPSTracker gps=new GPSTracker(this);
-            TextView textView= (TextView) findViewById(locate);
-            if(gps.canGetLocation()){
+            GPSTracker gps = new GPSTracker(this);
+//            TextView textView = (TextView) findViewById(locate);
+            location.setVisibility(View.VISIBLE);
+            hello.setVisibility(View.INVISIBLE);
+            call_log.setVisibility(View.INVISIBLE);
+            recognize.setVisibility(View.INVISIBLE);
+            if (gps.canGetLocation()) {
                 double latitude = gps.getLatitude();
-                double longitude=gps.getLongitude();
+                double longitude = gps.getLongitude();
+//                float size= (float) 15.0;
 //                Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-                textView.setText("Your location is - \n Latitude:"+latitude + "\nLongitude: " + longitude);
-            }
-            else{
+                location.setText("Your location is - \n Latitude:" + latitude + "\nLongitude: " + longitude);
+//                location.setTextSize(size);
+
+            } else {
                 return false;
             }
         } else if (id == R.id.nav_gallery) {
-
+            location.setVisibility(View.INVISIBLE);
+            recognize.setVisibility(View.INVISIBLE);
+            hello.setVisibility(View.INVISIBLE);
+            call_log.setVisibility(View.INVISIBLE);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
