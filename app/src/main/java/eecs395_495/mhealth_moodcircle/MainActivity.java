@@ -1,10 +1,7 @@
 package eecs395_495.mhealth_moodcircle;
 
 import android.content.ContentResolver;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.CallLog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -21,7 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -131,21 +127,26 @@ public class MainActivity extends AppCompatActivity
             } else {
                 return false;
             }
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_Calllog) {
             //CALL_LOG
 
+            Call_LogHelper call_logHelper=new Call_LogHelper();
+            call_logHelper.getCallDetails(this);
 
-            String[] calldetails = new String[5];
-            calldetails[0] = "\n\n\n";
-            calldetails[1] = this.getcalldetails();
-            ArrayAdapter<String> callAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, calldetails);
+            String[] callDetails = new String[5];
+            callDetails[0] = "\n\n\n";
+            callDetails[1] = call_logHelper.getCall_Log();
+            ArrayAdapter<String> callAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, callDetails);
             location_View.setAdapter(callAdapter);
             location_View.setVisibility(View.VISIBLE);
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_smsMessage) {
 
             //SMS Message
             List<Sms> msg = new ArrayList<>();
-            msg = this.getAllSms();
+//            msg = this.getAllSms();
+            SMS_Tracker sms_tracker=new SMS_Tracker();
+            sms_tracker.getAllSms(this);
+            msg=sms_tracker.getSmsList();
             StringBuilder sb=new StringBuilder();
 
             Iterator<Sms> msgIterator=msg.iterator();
@@ -159,7 +160,9 @@ public class MainActivity extends AppCompatActivity
             ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, smsMsg);
             location_View.setAdapter(arrayAdapter);
             location_View.setVisibility(View.VISIBLE);
-        } else if (id == R.id.nav_manage) {
+
+
+        } else if (id == R.id.nav_questionnaire) {
             location_View.setVisibility(View.INVISIBLE);
         } else if (id == R.id.nav_share) {
 
@@ -172,82 +175,8 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private String getcalldetails() {
-        StringBuffer sb = new StringBuffer();
-        Cursor managedCursor = managedQuery(CallLog.Calls.CONTENT_URI, null, null, null, null);
-        int number = managedCursor.getColumnIndex(CallLog.Calls.NUMBER);
-        int type = managedCursor.getColumnIndex(CallLog.Calls.TYPE);
-        int date = managedCursor.getColumnIndex(CallLog.Calls.DATE);
-        int duration = managedCursor.getColumnIndex(CallLog.Calls.DURATION);
-        sb.append("Call Details :");
-        managedCursor.moveToNext();
-        while (managedCursor.moveToNext()) {
-            String phNumber = managedCursor.getString(number);
-            String callType = managedCursor.getString(type);
-            String callDate = managedCursor.getString(date);
-            Date callDayTime = new Date(Long.valueOf(callDate));
-            String callDuration = managedCursor.getString(duration);
-            String dir = null;
-            int dircode = Integer.parseInt(callType);
-            switch (dircode) {
-                case CallLog.Calls.OUTGOING_TYPE:
-                    dir = "OUTGOING";
-                    break;
 
-                case CallLog.Calls.INCOMING_TYPE:
-                    dir = "INCOMING";
-                    break;
 
-                case CallLog.Calls.MISSED_TYPE:
-                    dir = "MISSED";
-                    break;
-            }
-            sb.append("\nPhone Number:--- " + phNumber + " \nCall Type:--- " + dir + " \nCall Date:--- " + callDayTime + " \nCall duration in sec :--- " + callDuration);
-            sb.append("\n----------------------------------");
-        }
-        managedCursor.close();
-
-        return sb.toString();
-
-    }
-
-    private List<Sms> getAllSms() {
-        List<Sms> lstSms = new ArrayList<Sms>();
-        Sms objSms = new Sms();
-        Uri message = Uri.parse("content://sms/");
-        ContentResolver cr = this.getContentResolver();
-
-        Cursor c = cr.query(message, null, null, null, null);
-        this.startManagingCursor(c);
-        int totalSMS = c.getCount();
-
-        if (c.moveToFirst()) {
-            for (int i = 0; i < totalSMS; i++) {
-
-                objSms = new Sms();
-                objSms.setId(c.getString(c.getColumnIndexOrThrow("_id")));
-                objSms.setAddress(c.getString(c
-                        .getColumnIndexOrThrow("address")));
-                objSms.setMsg(c.getString(c.getColumnIndexOrThrow("body")));
-                objSms.setReadState(c.getString(c.getColumnIndex("read")));
-                objSms.setTime(c.getString(c.getColumnIndexOrThrow("date")));
-                if (c.getString(c.getColumnIndexOrThrow("type")).contains("1")) {
-                    objSms.setFolderName("inbox");
-                } else {
-                    objSms.setFolderName("sent");
-                }
-
-                lstSms.add(objSms);
-                c.moveToNext();
-            }
-        }
-        // else {
-        // throw new RuntimeException("You have no SMS");
-        // }
-        c.close();
-
-        return lstSms;
-    }
 }
 
 

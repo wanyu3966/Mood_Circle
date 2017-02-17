@@ -7,15 +7,15 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Location" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_Calllog"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Call_Log" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_smsMessage"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="SMSmessage" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_questionnaire"
             android:icon="@drawable/ic_menu_manage"
             android:title="Questionnaire" />
     </group>
