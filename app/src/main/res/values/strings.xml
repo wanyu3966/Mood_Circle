@@ -3,6 +3,28 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!-- Strings for the BINARY screen. -->
+    <string name="binary_message_morning">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how positive and negative have you felt this morning?</string>
+    <string name="binary_message_afternoon">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how positive and negative have you felt this afternoon?</string>
+    <string name="binary_message_evening">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how positive and negative have you felt this evening?</string>
+    <string name="binary_message_night">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how positive and negative have you felt tonight?</string>
+
+    <!-- Strings for the WORDS screen. -->
+    <string name="words_message_morning">Select each word that describes how you\'ve felt this morning.</string>
+    <string name="words_message_afternoon">Select each word that describes how you\'ve felt this afternoon.</string>
+    <string name="words_message_evening">Select each word that describes how you\'ve felt this evening.</string>
+    <string name="words_message_night">Select each word that describes how you\'ve felt tonight.</string>
+
+    <!-- Strings for MAIN screen. -->
+    <string name="main_label_status_incomplete">Incomplete</string>
+    <string name="main_label_status_complete">Complete</string>
+    <string name="title_activity_mood_ratings">MoodRatings</string>
+
+    <!-- Strings for RATINGS screen. -->
+    <string name="ratings_message_morning">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how strongly have you felt each of the following this morning?</string>
+    <string name="ratings_message_afternoon">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how strongly have you felt each of the following this afternoon?</string>
+    <string name="ratings_message_evening">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how strongly have you felt each of the following this evening?</string>
+    <string name="ratings_message_night">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how strongly have you felt each of the following tonight?</string>
 
     <string name="action_settings">Settings</string>
 </resources>

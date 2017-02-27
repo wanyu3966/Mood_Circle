@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="moodcircle_interface.SurveyActivity">
+
+    <GridLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:columnCount="3"
+        android:orientation="horizontal"
+        android:id="@+id/main_grid_assessments">
+
+        <!-- Morning Assessment -->
+        <TextView
+            android:text="Morning Assessment: "
+            android:id="@+id/main_label_morning" />
+
+        <TextView
+            android:text="@string/main_label_status_incomplete"
+            android:id="@+id/main_label_morning_status" />
+
+        <Button
+            android:text="Take"
+            android:id="@+id/main_button_morning"
+            android:onClick="takeAssessment"/>
+
+        <!-- Afternoon Assessment -->
+        <TextView
+            android:text="Afternoon Assessment: "
+            android:id="@+id/main_label_afternoon" />
+
+        <TextView
+            android:text="@string/main_label_status_incomplete"
+            android:id="@+id/main_label_afternoon_status" />
+
+        <Button
+            android:text="Take"
+            android:id="@+id/main_button_afternoon"
+            android:onClick="takeAssessment"/>
+
+        <!-- Evening Assessment -->
+        <TextView
+            android:text="Evening Assessment: "
+            android:id="@+id/main_label_evening" />
+
+        <TextView
+            android:text="@string/main_label_status_incomplete"
+            android:id="@+id/main_label_evening_status" />
+
+        <Button
+            android:text="Take"
+            android:id="@+id/main_button_evening"
+            android:onClick="takeAssessment"/>
+
+        <!-- Night Assessment -->
+        <TextView
+            android:text="Night Assessment: "
+            android:id="@+id/main_label_night" />
+
+        <TextView
+            android:text="@string/main_label_status_incomplete"
+            android:id="@+id/main_label_night_status" />
+
+        <Button
+            android:text="Take"
+            android:id="@+id/main_button_night"
+            android:onClick="takeAssessment"/>
+
+    </GridLayout>
+
+</RelativeLayout>
